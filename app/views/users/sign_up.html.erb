@@ -1,6 +1,6 @@
 <h1>使用者註冊</h1>
 
-<%= form_for(User.new, url: '/sign_up', method: 'post') do |f| %>
+<%= form_for(@user, url: '/sign_up', method: 'post') do |f| %>
   <div>
     <%= f.label :email %>
     <%= f.text_field :email %>
