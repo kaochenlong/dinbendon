@@ -1,0 +1,7 @@
+<% if session[:ccc9527] %>
+  <%= session[:ccc9527] %> | 
+  <%= link_to "登出", logout_path, method: 'delete' %>
+<% else %>
+  <a href="/sign_up">註冊</a> |
+  <a href="/login">登入</a>
+<% end %>
