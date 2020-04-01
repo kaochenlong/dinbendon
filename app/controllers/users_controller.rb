@@ -7,19 +7,15 @@ class UsersController < ApplicationController
   end
 
   def registration
-    if user_params[:password] == user_params[:password_confirm]
-      @user = User.new(user_params)
-      if @user.save
-        # 成功
-        # TODO: 密碼加密
-        # TODO: 幫登入
-        redirect_to "/"
-      else
-        # 失敗
-        render :sign_up
-      end
+    @user = User.new(user_params)
+    if @user.save
+      # 成功
+      # TODO: 密碼加密
+      # TODO: 幫登入
+      redirect_to "/"
     else
-      redirect_to "/sign_up"
+      # 失敗
+      render :sign_up
     end
   end
 
@@ -27,6 +23,6 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:email, 
                                  :password, 
-                                 :password_confirm)
+                                 :password_confirmation)
   end
 end
