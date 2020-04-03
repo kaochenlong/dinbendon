@@ -2,3 +2,12 @@
 
 <%= link_to "新增", new_item_path %>
 
+<ul>
+  <% @items.each do |item| %>
+    <li>
+      <%= item.name %>
+      <%= link_to "刪除", item_path(item.id), method: 'delete', data: {confirm: "是否確認刪除?"} %>
+    </li>
+  <% end %>
+</ul>
+

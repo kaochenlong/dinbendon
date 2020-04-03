@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   def index
+    @items = Item.all
   end
 
   def new
@@ -14,6 +15,12 @@ class ItemsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def destroy
+    item = Item.find(params[:id])
+    item.destroy
+    redirect_to items_path, notice: '成功刪除餐點'
   end
 
   private
