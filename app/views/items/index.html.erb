@@ -5,9 +5,9 @@
 <ul>
   <% @items.each do |item| %>
     <li>
-      <%= link_to item.name, item_path(item.id) %>
-      <%= link_to "編輯", edit_item_path(item.id) %>
-      <%= link_to "刪除", item_path(item.id), method: 'delete', data: {confirm: "是否確認刪除?"} %>
+      <%= link_to item.name, item %>
+      <%= link_to "編輯", edit_item_path(item) %>
+      <%= link_to "刪除", item, method: 'delete', data: {confirm: "是否確認刪除?"} %>
     </li>
   <% end %>
 </ul>
