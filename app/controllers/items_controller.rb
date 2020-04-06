@@ -47,6 +47,7 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:name, 
                                  :description, 
                                  :price, 
+                                 :category_id,
                                  :spec)
   end
 end

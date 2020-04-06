@@ -9,9 +9,15 @@
   <% end %>
 
   <div>
+    <%= f.label :category %>
+    <%= f.collection_select :category_id, Category.all, :id, :name, prompt: true %>
+  </div>
+
+  <div>
     <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
+
   <div>
     <%= f.label :description %>
     <%= f.text_area :description %>
