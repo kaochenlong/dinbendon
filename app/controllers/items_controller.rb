@@ -1,8 +1,4 @@
 class ItemsController < ApplicationController
-
-  rescue_from ActiveRecord::RecordNotFound, 
-              with: :record_not_found
-
   def index
     @items = Item.all
   end
@@ -25,6 +21,20 @@ class ItemsController < ApplicationController
     end
   end
 
+  def edit
+    @item = Item.find(params[:id])
+  end
+
+  def update
+    @item = Item.find(params[:id])
+
+    if @item.update(item_params)
+      redirect_to items_path, notice: '成功更新餐點!'
+    else
+      render :edit
+    end
+  end
+
   def destroy
     item = Item.find(params[:id])
     item.destroy
@@ -37,11 +47,5 @@ class ItemsController < ApplicationController
                                  :description, 
                                  :price, 
                                  :spec)
-  end
-
-  def record_not_found
-    render file: 'public/404.html', 
-           status: 404, 
-           layout: false
   end
 end
