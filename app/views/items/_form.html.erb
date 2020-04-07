@@ -9,6 +9,11 @@
   <% end %>
 
   <div>
+    <%= f.label :cover %>
+    <%= f.file_field :cover %>
+  </div>
+
+  <div>
     <%= f.label :category %>
     <%= f.collection_select :category_id, Category.all, :id, :name, prompt: true %>
   </div>

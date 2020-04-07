@@ -48,6 +48,7 @@ class ItemsController < ApplicationController
                                  :description, 
                                  :price, 
                                  :category_id,
+                                 :cover,
                                  :spec)
   end
 end

@@ -5,6 +5,7 @@
 <ul>
   <% @items.each do |item| %>
     <li>
+      <%= image_tag item.cover.variant(resize_to_limit: [200, 200])  if item.cover.attached? %>
       <%= link_to item.name, item %>
       <%= link_to "編輯", edit_item_path(item) %>
       <%= link_to "刪除", item, method: 'delete', data: {confirm: "是否確認刪除?"} %>
