@@ -1,8 +1,14 @@
 .item {
   .card {
+    .pic {
+      height: 0px;
+      padding-bottom: 60%;
+      position: relative;
+    }
     .cover-image {
-      display: block;
       width: 100%;
+      height: 100%;
+      position: absolute;
     }
   }
 }
