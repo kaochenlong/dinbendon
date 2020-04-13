@@ -8,7 +8,7 @@
       <div class="card">
         <%= image_tag item.cover.variant(resize_to_limit: [200, 200]), class: 'cover-image' if item.cover.attached? %>
         <div class="card-body">
-          <h5 class="card-title>
+          <h5 class="card-title">
             <%= link_to item.name, item %>
           </h5>
           <%= link_to "編輯", edit_item_path(item), class: 'btn btn-primary' %>
