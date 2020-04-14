@@ -1,16 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Cart, type: :model do
+
+  let(:cart) { Cart.new }
+
   describe "基本功能" do
     it "可以把商品丟到到購物車裡，然後購物車裡就有東西了" do
-      cart = Cart.new
       cart.add_item(1)
-      expect(cart.empty?).to be false
+      expect(cart).not_to be_empty
     end
 
     it "加了相同種類的商品到購物車裡，購買項目不會增加，數量會改變" do
-      cart = Cart.new
-
       3.times { cart.add_item(1) }
       2.times { cart.add_item(2) }
       2.times { cart.add_item(1) }
@@ -20,10 +20,8 @@ RSpec.describe Cart, type: :model do
 
     it "商品可以放到購物車裡，也可以再拿出來" do
       # Arrange
-      cart = Cart.new
-
-      i1 = FactoryBot.create(:item)
-      i2 = FactoryBot.create(:item)
+      i1 = create(:item)
+      i2 = create(:item)
       
       # Act
       3.times { cart.add_item(i1.id) }
@@ -36,10 +34,8 @@ RSpec.describe Cart, type: :model do
 
     it "可以計算整台購物車的總消費金額" do
       # Arrange
-      cart = Cart.new
-
-      i1 = FactoryBot.create(:item, price: 50)
-      i2 = FactoryBot.create(:item, price: 100)
+      i1 = create(:item, price: 50)
+      i2 = create(:item, price: 100)
       
       # Act
       3.times { cart.add_item(i1.id) }
@@ -52,10 +48,8 @@ RSpec.describe Cart, type: :model do
     it "特別活動可搭配折扣" do
       # 4/1 全館打 1 折
       # Arrange
-      cart = Cart.new
-
-      i1 = FactoryBot.create(:item, price: 50)
-      i2 = FactoryBot.create(:item, price: 100)
+      i1 = create(:item, price: 50)
+      i2 = create(:item, price: 100)
       
       # Act
       3.times { cart.add_item(i1.id) }
@@ -72,40 +66,33 @@ RSpec.describe Cart, type: :model do
   describe "進階功能" do
     it "可以將購物車內容轉換成 Hash" do
       # Arrange
-      cart = Cart.new
-
-      i1 = FactoryBot.create(:item)
-      i2 = FactoryBot.create(:item)
+      i1 = create(:item)
+      i2 = create(:item)
 
       # Act
       3.times { cart.add_item(i1.id) }
       2.times { cart.add_item(i2.id) }
 
-      result = {
-        "items" => [
-          { "item_id" => 1, "quantity" => 3 }, 
-          { "item_id" => 2, "quantity" => 2 }
-        ]
-      }
-
       # Assert
-      expect(cart.to_hash).to eq result
+      expect(cart.to_hash).to eq cart_hash
     end
 
     it "Hash 還原成購物車" do
-      # Arrange
-      result = {
-        "items" => [
-          { "item_id" => 1, "quantity" => 3 }, 
-          { "item_id" => 2, "quantity" => 2 }
-        ]
-      }
-      
       # Act
-      cart = Cart.from_hash(result)
+      cart = Cart.from_hash(cart_hash)
 
       # Assert
       expect(cart.items.count).to be 2
     end
+  end
+
+  private
+  def cart_hash
+    {
+      "items" => [
+        { "item_id" => 1, "quantity" => 3 }, 
+        { "item_id" => 2, "quantity" => 2 }
+      ]
+    }
   end
 end

@@ -6,8 +6,8 @@ RSpec.describe CartItem, type: :model do
       # Arrange
       cart = Cart.new
 
-      i1 = FactoryBot.create(:item, price: 50)
-      i2 = FactoryBot.create(:item, price: 100)
+      i1 = create(:item, price: 50)
+      i2 = create(:item, price: 100)
 
       # Act
       3.times { cart.add_item(i1.id) }
