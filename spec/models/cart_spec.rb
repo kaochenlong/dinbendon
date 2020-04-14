@@ -48,6 +48,25 @@ RSpec.describe Cart, type: :model do
       # Assert
       expect(cart.total).to be 350
     end
+
+    it "特別活動可搭配折扣" do
+      # 4/1 全館打 1 折
+      # Arrange
+      cart = Cart.new
+
+      i1 = FactoryBot.create(:item, price: 50)
+      i2 = FactoryBot.create(:item, price: 100)
+      
+      # Act
+      3.times { cart.add_item(i1.id) }
+      2.times { cart.add_item(i2.id) }
+
+      t = Time.local(2008, 4, 1, 10, 5, 0)
+      Timecop.travel(t)
+
+      # Assert
+      expect(cart.total).to be 35.0
+    end
   end
 
   describe "進階功能" do
