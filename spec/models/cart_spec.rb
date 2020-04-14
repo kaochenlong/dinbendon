@@ -70,5 +70,26 @@ RSpec.describe Cart, type: :model do
   end
 
   describe "進階功能" do
+    it "可以將購物車內容轉換成 Hash" do
+      # Arrange
+      cart = Cart.new
+
+      i1 = FactoryBot.create(:item)
+      i2 = FactoryBot.create(:item)
+
+      # Act
+      3.times { cart.add_item(i1.id) }
+      2.times { cart.add_item(i2.id) }
+
+      result = {
+        "items" => [
+          { "item_id" => 1, "quantity" => 3 }, 
+          { "item_id" => 2, "quantity" => 2 }
+        ]
+      }
+
+      # Assert
+      expect(cart.to_hash).to eq result
+    end
   end
 end
