@@ -91,5 +91,21 @@ RSpec.describe Cart, type: :model do
       # Assert
       expect(cart.to_hash).to eq result
     end
+
+    it "Hash 還原成購物車" do
+      # Arrange
+      result = {
+        "items" => [
+          { "item_id" => 1, "quantity" => 3 }, 
+          { "item_id" => 2, "quantity" => 2 }
+        ]
+      }
+      
+      # Act
+      cart = Cart.from_hash(result)
+
+      # Assert
+      expect(cart.items.count).to be 2
+    end
   end
 end

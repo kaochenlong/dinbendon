@@ -1,6 +1,6 @@
 class Cart
-  def initialize
-    @items = []
+  def initialize(items = [])
+    @items = items
   end
 
   def add_item(item_id)
@@ -39,6 +39,18 @@ class Cart
     # end
     #
     # return tmp
+  end
+
+  def self.from_hash(hash = nil)
+    if hash && hash["items"]
+      items = hash["items"].map { |item|
+        CartItem.new(item["item_id"], item["quantity"])
+      }
+
+      new(items)
+    else
+      new
+    end
   end
 
   def to_hash
