@@ -9,5 +9,8 @@ class CartItem
   def increment!(amount = 1)
     @quantity += amount
   end
-end
 
+  def item
+    Item.find(@item_id)
+  end
+end
