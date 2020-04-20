@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
 
   def show
     @comment = Comment.new
-    @comments = @item.comments
+    @comments = @item.comments.includes(:user)  # eager loading
   end
 
   def new
