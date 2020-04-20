@@ -1,4 +1,9 @@
-<h1><%= @item.name %>(<%= @item.price %> 元)</h1>
+<h1 data-controller="item">
+  <%= @item.name %>(<%= @item.price %> 元)
+  <a href="#" class="btn btn-danger" data-action="item#heart">
+    <i class="far fa-heart" data-target="item.icon"></i>
+  </a>
+</h1>
 
 <%= image_tag @item.cover.variant(resize_to_limit: [500, 500]), class: 'cover-image' if @item.cover.attached? %>
 
