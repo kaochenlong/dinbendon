@@ -3,3 +3,12 @@
 <ul>
   <li>價錢：<%= @item.price %></li>
 </ul>
+
+<h3>留言</h3>
+<%= form_for(@comment, url: item_comments_path(@item)) do |form| %>
+  <div>
+    <%= form.text_area :content %>
+  </div>
+
+  <%= form.submit %>
+<% end %>
