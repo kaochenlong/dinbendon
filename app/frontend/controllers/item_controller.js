@@ -2,7 +2,7 @@ import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
 
 export default class extends Controller {
-  static targets = ["icon"]
+  static targets = ["icon","item_id" ]
 
   heart(e) {
     e.preventDefault();
@@ -25,5 +25,24 @@ export default class extends Controller {
         console.log(err);
       } 
     })
+  }
+
+  additem(e) {
+    e.preventDefault();
+
+    let item_id = this.item_idTarget.value;
+    console.log(item_id);
+
+    Rails.ajax({
+      url: `/items/${item_id}/add_to_cart`, 
+      type: 'POST', 
+      success: resp => {
+        document.querySelector('#items_count').innerText = resp.items_count 
+      }, 
+      error: err => {
+        console.log(err);
+      } 
+    })
+
   }
 }
