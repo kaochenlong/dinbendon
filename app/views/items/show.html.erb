@@ -10,6 +10,7 @@
 <div data-controller="comment">
   <h3>留言</h3>
   <%= form_for(@comment, url: item_comments_path(@item), remote: true) do |form| %>
+    <input type="hidden" id="item_id" value="<%= @item.id %>">
     <div class="form-group">
       <%= form.text_area :content, 
                          class: 'form-control', 
