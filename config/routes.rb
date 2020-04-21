@@ -4,8 +4,17 @@ Rails.application.routes.draw do
   resources :categories
 
   resources :items do 
+    member do
+      post :add_to_cart
+    end
+
     resources :comments, only: [:create]
   end
+
+  # cart
+  # post "/abc/:id", to: "cart#add", as: :cc
+
+  resource :cart, only: [:show, :destroy]
 
   # users
   get "/login", to: "users#login"

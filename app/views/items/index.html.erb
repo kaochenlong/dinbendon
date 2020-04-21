@@ -15,6 +15,7 @@
           </h5>
           <%= link_to "編輯", edit_item_path(item), class: 'btn btn-primary' %>
           <%= link_to "刪除", item, method: 'delete', data: {confirm: "是否確認刪除?"}, class: 'btn btn-success' %>
+          <%= link_to "加到購物車", add_to_cart_item_path(item), method: 'post', class: 'btn btn-danger' %>
         </div>
       </div>
     </div>
