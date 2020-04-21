@@ -5,7 +5,9 @@ export default class extends Controller {
 
   check(e) {
     if (this.contentTarget.value.length >= 2) {
-      console.log('ok');
+      this.submitTarget.disabled = false
+    } else {
+      this.submitTarget.disabled = true
     }
   }
 }
