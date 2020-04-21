@@ -44,7 +44,7 @@ class ItemsController < ApplicationController
     current_cart.add_item(@item.id)
     session[:carty] = current_cart.to_hash
     
-    redirect_to root_path, notice: '已加到購物車'
+    render json: { items_count: current_cart.items.count }
   end
 
   private

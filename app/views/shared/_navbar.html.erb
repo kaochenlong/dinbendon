@@ -30,7 +30,7 @@
       <li>
         <%= link_to cart_path, class: 'nav-link' do %>
           購物車 <i class="fas fa-shopping-cart"></i> 
-          <%= current_cart.items.count %>
+          <span id="items_count"><%= current_cart.items.count %></span>
         <% end %>
       </li>
       <li>
