@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   def registration
     @user = User.new(user_params)
     if @user.save
-      session[:ccc9527] = @user.email
+      session[:ccc9527] = @user.id
       # TODO: 密碼加密
       redirect_to root_path
     else
@@ -40,7 +40,8 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:email, 
+    params.require(:user).permit(:email,
+                                 :nickname, 
                                  :password, 
                                  :password_confirmation)
   end
