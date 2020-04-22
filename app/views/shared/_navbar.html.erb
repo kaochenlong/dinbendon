@@ -34,7 +34,9 @@
         <% end %>
       </li>
       <li>
-        <a href="#" class="nav-link">日安，<%= current_user.email %></a>
+        <a href="#" class="nav-link">日安，
+          <%= current_user.nickname == "" ? current_user.email : current_user.nickname %>
+        </a>
       </li>
       <li class="nav-item">
         <%= link_to "登出", logout_path, method: 'delete', class: 'nav-link' %>
