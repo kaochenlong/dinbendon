@@ -10,4 +10,11 @@ class User < ApplicationRecord
 
   has_many :favorite_items
   has_many :items, through: :favorite_items
+
+  def display_name
+    if nickname.present?
+      nickname
+    else email.split("@").first
+    end
+  end
 end
