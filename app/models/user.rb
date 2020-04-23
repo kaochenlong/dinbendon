@@ -1,4 +1,7 @@
+require 'digest'
 class User < ApplicationRecord
+  before_create :encrypt_password
+
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, 
                        confirmation: true, 
@@ -13,6 +16,11 @@ class User < ApplicationRecord
 
   def displayname
     self.nickname == "" ? self.email : self.nickname
+  end
+
+  private
+  def encrypt_password
+    self.password = Digest::SHA256.hexdigest(password)
   end
 
 end
