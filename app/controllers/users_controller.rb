@@ -10,8 +10,9 @@ class UsersController < ApplicationController
   end
 
   def sign_in
-    user = User.find_by(email: user_params[:email], 
-                        password: user_params[:password])
+
+    user = User.find_by(email: user_params[:email])
+               .try(:authenticate, user_params[:password])
 
     if user 
       session[:ccc9527] = user.id
@@ -25,7 +26,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:ccc9527] = @user.id
-      # TODO: 密碼加密
+      # TODO: 密碼加密 V
       redirect_to root_path
     else
       # 失敗
