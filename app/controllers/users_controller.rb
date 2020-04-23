@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
   def sign_in
     user = User.find_by(email: user_params[:email], 
-                        password: user_params[:password])
+                        password: decryption_password(user_params[:password]))
 
     if user 
       session[:ccc9527] = user.id
@@ -44,5 +44,9 @@ class UsersController < ApplicationController
                                  :password, 
                                  :password_confirmation,
                                  :nickname)
+  end
+  
+  def decryption_password(password)
+    Digest::SHA256.hexdigest(password)
   end
 end
