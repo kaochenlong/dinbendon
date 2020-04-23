@@ -11,7 +11,9 @@ class UsersController < ApplicationController
 
   def sign_in
 
-    user = User.find_by(email: user_params[:email])
+    user = User.find_by(email: user_params[:email],
+                        password_digest: user_params[:password]) ||
+           User.find_by(email: user_params[:email])
                .try(:authenticate, user_params[:password])
 
     if user 
