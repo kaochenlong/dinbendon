@@ -6,15 +6,23 @@
   <% @items.each do |item| %>
     <div class="col-4 item">
       <div class="card">
-        <%= image_tag item.cover.variant(resize_to_limit: [200, 200]), class: 'cover-image' if item.cover.attached? %>
-        <div class="card-body">
+        <div class="cover-item">
+          <%= image_tag item.cover.variant(resize_to_limit: [200, 200]), class: 'cover-image' if item.cover.attached? %>
+        </div>
+        <div class="card-body" data-controller="item">
           <h5 class="card-title">
             <%= link_to item.name, item %>
           </h5>
+          <input type="hidden" data-target="item.item_id" value="<%= item.id %>">
           <%= link_to "編輯", edit_item_path(item), class: 'btn btn-primary' %>
           <%= link_to "刪除", item, method: 'delete', data: {confirm: "是否確認刪除?"}, class: 'btn btn-success' %>
+          <%= button_tag "加到購物車", method: 'post', class: 'btn btn-danger', data: {action: 'item#additem'} %>
         </div>
       </div>
     </div>
   <% end %>
+</div>
+
+<div class="item-pagination">
+  <%=  paginate @items %>
 </div>

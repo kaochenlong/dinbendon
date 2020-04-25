@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
 
-
+gem 'kaminari', '~> 1.2.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
 # Use sqlite3 as the database for Active Record
@@ -36,6 +36,7 @@ group :development, :test do
   gem 'faker', '~> 2.11'
   gem 'factory_bot_rails', '~> 5.1', '>= 5.1.1'
   gem 'timecop', '~> 0.9.1'
+  gem 'hirb-unicode', '~> 0.0.5'
 end
 
 group :development do

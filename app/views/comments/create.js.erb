@@ -1,0 +1,4 @@
+var comments = document.querySelector('#comments');
+comments.innerHTML = "<%= j render('comments/comment', comment: @comment) %>" + comments.innerHTML;
+
+document.querySelector('#comment_content').value = '';

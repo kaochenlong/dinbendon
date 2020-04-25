@@ -1,5 +1,38 @@
-<h1><%= @item.name %></h1>
+<h1 data-controller="item">
+  <%= @item.name %>(<%= @item.price %> 元)
+  <a href="#" class="btn btn-danger" data-action="item#heart">
+    <% if @item.favorited_by(current_user) %>
+      <i class="fas fa-heart" data-target="item.icon"></i>
+    <% else %>
+      <i class="far fa-heart" data-target="item.icon"></i>
+    <% end %>
+  </a>
+  <input type="hidden" data-target="item.item_id" value="<%= @item.id %>">
+  <%= button_tag "加到購物車", method: 'post', class: 'btn btn-danger', data: {action: 'item#additem'} %>
+</h1>
 
-<ul>
-  <li>價錢：<%= @item.price %></li>
-</ul>
+<%= image_tag @item.cover.variant(resize_to_limit: [500, 500]), class: 'cover-image' if @item.cover.attached? %>
+
+<div data-controller="comment">
+  <h3>留言</h3>
+  <%= form_for(@comment, url: item_comments_path(@item), remote: true) do |form| %>
+    <input type="hidden" id="item_id" value="<%= @item.id %>">
+    <div class="form-group">
+      <%= form.text_area :content, 
+                         class: 'form-control', 
+                         data: {target: 'comment.content', 
+                                action: 'keyup->comment#check' } %>
+    </div>
+
+    <%= form.submit class: 'btn btn-success', disabled: true, data: {target: 'comment.submit' } %>
+  <% end %>
+</div>
+
+<hr>
+
+<div id="comments">
+<% @comments.each do |comment| %>
+  <%= render 'comments/comment', comment: comment %>
+<% end %>
+</div>
+
