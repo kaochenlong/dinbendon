@@ -10,10 +10,8 @@ class UsersController < ApplicationController
   end
 
   def sign_in
-    user = User.find_by(email: user_params[:email],
-                        password: user_params[:password])||
-           User.find_by(email: user_params[:email],             
-                        password: Digest::SHA256.hexdigest(user_params[:password]))
+    user = User.find_by(email: user_params[:email],             
+                        password: salty_password(user_params[:password]))
 
     if user 
       session[:ccc9527] = user.id
@@ -46,5 +44,9 @@ class UsersController < ApplicationController
                                  :nickname, 
                                  :password, 
                                  :password_confirmation)
+  end
+
+  def salty_password(s)
+    Digest::SHA256.hexdigest(User::SALTF + s + User::SALTE)
   end
 end

@@ -14,8 +14,11 @@ class User < ApplicationRecord
   has_many :favorite_items
   has_many :items, through: :favorite_items
 
+  SALTF = "bEN"
+  SALTE = "Don"
+
   def displayname
-    self.nickname == "" ? self.email : self.nickname
+    nickname == "" ? email : nickname
   end
 
   private
