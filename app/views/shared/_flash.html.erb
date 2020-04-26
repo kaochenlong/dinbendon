@@ -1,12 +1,18 @@
 <% if notice %>
-  <div class="alert alert-success" role="alert">
+  <div class="alert alert-success" role="alert" data-controller="notice" data-target="notice.message">
     <%= notice %>
+    <button type="button" class="close" data-action="notice#close">
+     <span aria-hidden="true">&times;</span>
+    </button>
   </div>
 <% end %>
 
 <% if alert %>
-  <div class="alert alert-danger" role="alert">
+  <div class="alert alert-danger" role="alert" data-controller="alert" data-target="alert.message">
     <%= alert %>
   </div>
+    <button type="button" class="close" data-action="alert#close">
+     <span aria-hidden="true">&times;</span>
+    </button>
 <% end %>
 
