@@ -1,3 +1,4 @@
+<h1 class="my-4">修改使用者資料</h1>
 <%= form_for(@user) do |f| %>
 
   <% if @user.errors.any? %>
@@ -7,22 +8,21 @@
     <% end %>
     </ul>
    <% end %>
-
-  <div>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-
-  <div>
-    <%= f.label :tel %>
-    <%= f.text_field :tel %>
-  </div>
-  
+   <div>
+    Email <%= current_user.email %>
+  </div> 
   <div>
     <%= f.label :nickname %>
     <%= f.text_field :nickname %>
   </div>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :tel %>
+    <%= f.text_field :tel %>
+  </div>
 
-
-  <%= f.submit %>
+  <%= f.submit class: 'my-3' %>
 <% end %>
