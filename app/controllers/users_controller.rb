@@ -37,6 +37,19 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def edit
+    @user = current_user
+  end
+
+  def update
+    @user = current_user
+    if @user.update(user_update_params)
+      redirect_to root_path, notice: 'user update!'
+    else
+      render :edit
+    end
+  end
+
   private
   def user_params
     params.require(:user).permit(:email,
@@ -44,4 +57,11 @@ class UsersController < ApplicationController
                                  :password, 
                                  :password_confirmation)
   end
+
+  def user_update_params
+    params.require(:user).permit(:nickname,
+                                 :tel,
+                                 :name)
+  end
+
 end
