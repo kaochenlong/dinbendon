@@ -33,6 +33,7 @@
   document.addEventListener("turbolinks:load", function() {
     let button = document.querySelector("#submit-order");
     let nonce_field = document.querySelector("#order_nonce");
+    let form = document.querySelector("#new_order");
 
     braintree.dropin.create({
       authorization: '<%= @token %>',
