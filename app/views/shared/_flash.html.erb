@@ -1,17 +1,17 @@
 <% if notice %>
-  <div class="alert alert-success" role="alert" data-controller="notice" data-target="notice.message">
+  <div class="alert alert-success" role="alert" data-controller="flash" data-target="flash.message">
     <%= notice %>
-    <button type="button" class="close" data-action="notice#close">
+    <button type="button" class="close" data-action="flash#close">
      <span aria-hidden="true">&times;</span>
     </button>
   </div>
 <% end %>
 
 <% if alert %>
-  <div class="alert alert-danger" role="alert" data-controller="alert" data-target="alert.message">
+  <div class="alert alert-danger" role="alert" data-controller="flash" data-target="flash.message">
     <%= alert %>
   </div>
-    <button type="button" class="close" data-action="alert#close">
+    <button type="button" class="close" data-action="flash#close">
      <span aria-hidden="true">&times;</span>
     </button>
 <% end %>
