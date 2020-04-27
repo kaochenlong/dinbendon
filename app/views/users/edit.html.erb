@@ -1,0 +1,28 @@
+<%= form_for(@user) do |f| %>
+
+  <% if @user.errors.any? %>
+    <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+   <% end %>
+
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :tel %>
+    <%= f.text_field :tel %>
+  </div>
+  
+  <div>
+    <%= f.label :nickname %>
+    <%= f.text_field :nickname %>
+  </div>
+
+
+  <%= f.submit %>
+<% end %>
