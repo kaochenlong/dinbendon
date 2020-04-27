@@ -31,6 +31,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'foreman', '~> 0.87.1'
 gem "braintree", "~> 2.101.0"
 gem 'figaro', '~> 1.1', '>= 1.1.1'
+gem 'aasm', '~> 5.0', '>= 5.0.8'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

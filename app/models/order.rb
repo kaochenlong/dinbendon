@@ -1,10 +1,35 @@
 class Order < ApplicationRecord
+  include AASM
+
   attr_reader :nonce
 
   belongs_to :user
   has_many :order_items
 
   before_create :create_order_num
+
+  aasm column: 'state' do
+    state :pending, initial: true
+    state :paid, :delivered, :cancelled
+
+    event :pay do
+      transitions from: :pending, to: :paid
+
+      after_transaction do
+        puts "-" * 10
+        puts "發送簡訊"
+        puts "-" * 10
+      end
+    end
+
+    event :deliver do
+      transitions from: :paid, to: :delivered
+    end
+
+    event :cancel do
+      transitions from: [:pending, :paid], to: :cancelled
+    end
+  end
 
   private
 
