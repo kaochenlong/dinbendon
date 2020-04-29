@@ -10,10 +10,9 @@ class UsersController < ApplicationController
   end
 
   def sign_in
-    user = User.find_by(email: user_params[:email], 
-                        password: user_params[:password])
+    user = User.find_by(email: user_params[:email])
 
-    if user 
+    if user && user.authenticate(user_params[:password])
       session[:ccc9527] = user.id
       redirect_to root_path
     else
