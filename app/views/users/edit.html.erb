@@ -9,7 +9,7 @@
     </ul>
    <% end %>
    <div>
-    Email <%= current_user.email %>
+    Email <%= @user.email %>
   </div> 
   <div>
     <%= f.label :nickname %>
@@ -22,6 +22,15 @@
   <div>
     <%= f.label :tel %>
     <%= f.text_field :tel %>
+  </div>
+  <hr>
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password, autocomplete: "new-password" %><small class="mx-2">leave blank if you don't want to change it</small>
+  </div>
+  <div>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
   <%= f.submit class: 'my-3' %>
