@@ -45,7 +45,7 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     if @user.update(update_params)
-      redirect_to root_path, notice: 'user update!'
+      redirect_to root_path, notice: 'user updated!'
     else
       render :edit
     end
@@ -61,23 +61,16 @@ class UsersController < ApplicationController
 
   def update_params
     if params[:user][:password].blank?
-      update_info_params
+      params.require(:user).permit(:nickname,
+                                   :tel,
+                                   :name)
     else
-      update_password_params
+      params.require(:user).permit(:nickname,
+                                   :tel,
+                                   :name,
+                                   :password,
+                                   :password_confirmation)
     end  
-  end
-
-  def update_info_params
-    params.require(:user).permit(:nickname,
-                                 :tel,
-                                 :name)
-  end
-  def update_password_params
-    params.require(:user).permit(:nickname,
-                                 :tel,
-                                 :name,
-                                 :password,
-                                 :password_confirmation)
   end
 
 end
