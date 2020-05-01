@@ -2,9 +2,8 @@ class User < ApplicationRecord
   has_secure_password
 
   validates :email, presence: true, uniqueness: true
-  validates :password, presence: true,
-                       confirmation: true, 
-                       length: { minimum: 4 }
+  validates :password, length: { minimum: 4 }, presence: true, on: :create
+  validates :password, confirmation: true
 
   has_many :histories
   has_many :events, through: :histories
@@ -18,5 +17,4 @@ class User < ApplicationRecord
   def displayname
     self.nickname == "" ? self.email : self.nickname
   end
-
 end
