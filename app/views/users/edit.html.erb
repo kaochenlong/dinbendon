@@ -1,0 +1,37 @@
+<h1 class="my-4">修改使用者資料</h1>
+<%= form_for(@user) do |f| %>
+
+  <% if @user.errors.any? %>
+    <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+   <% end %>
+   <div>
+    Email <%= @user.email %>
+  </div> 
+  <div>
+    <%= f.label :nickname %>
+    <%= f.text_field :nickname %>
+  </div>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :tel %>
+    <%= f.text_field :tel %>
+  </div>
+  <hr>
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password, autocomplete: "new-password" %><small class="mx-2">leave blank if you don't want to change it</small>
+  </div>
+  <div>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <%= f.submit class: 'my-3' %>
+<% end %>

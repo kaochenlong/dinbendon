@@ -14,7 +14,17 @@ Rails.application.routes.draw do
   # cart
   # post "/abc/:id", to: "cart#add", as: :cc
 
-  resource :cart, only: [:show, :destroy]
+  resource :cart, only: [:show, :destroy] do
+    collection do
+      get :checkout
+    end
+  end
+
+  resources :orders, only: [:index, :show, :create] do
+    member do
+      delete :cancel
+    end
+  end
 
   # users
   get "/login", to: "users#login"
@@ -22,6 +32,7 @@ Rails.application.routes.draw do
   delete "/logout", to: "users#logout"
   get "/sign_up", to: "users#sign_up"
   post "/sign_up", to: "users#registration"
+  resource :user, only: [:edit, :update]
 
   # APIs
   namespace :api do

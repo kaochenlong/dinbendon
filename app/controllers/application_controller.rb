@@ -24,4 +24,13 @@ class ApplicationController < ActionController::Base
   def current_cart
     @_ca123 ||= Cart.from_hash(session[:carty])
   end
+
+  def gateway
+    Braintree::Gateway.new(
+      environment: :sandbox,
+      merchant_id: ENV['bt_merchant_id'],
+      public_key: ENV['bt_public_key'],
+      private_key: ENV['bt_private_key']
+    )
+  end
 end

@@ -1,0 +1,26 @@
+<% if not current_cart.empty? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>餐點</th>
+        <th>數量</th>
+        <th>小計</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% current_cart.items.each do |cart_item| %>
+      <tr>
+        <td><%= cart_item.item.name %> (<%= cart_item.item.price %>元)</td>
+        <td><%= cart_item.quantity %></td>
+        <td><%= cart_item.total %></td>
+      </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2">總計</td>
+        <td><%= current_cart.total %></td>
+      </tr>
+    </tfoot>
+  </table>
+<% end %>

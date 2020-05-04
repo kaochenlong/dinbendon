@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :find_item, only: [:show, :edit, :update, :destroy, :add_to_cart] 
 
   def index
-    @items = Item.all
+    @items = Item.page(params[:page]).per(6)
   end
 
   def show
