@@ -2,15 +2,15 @@ import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
 
 export default class extends Controller {
-  static targets = ["icon","item_id" ]
+  static targets = ["icon","itemId" ]
 
   heart(e) {
     e.preventDefault();
 
-    let item_id = document.querySelector('#item_id').value;
+    let itemId = document.querySelector('#item_id').value;
 
     Rails.ajax({
-      url: `/api/v1/items/${item_id}/favorite`, 
+      url: `/api/v1/items/${itemId}/favorite`, 
       type: 'POST', 
       success: resp => {
         if (resp.status === "favorited") {
@@ -27,17 +27,15 @@ export default class extends Controller {
     })
   }
 
-  additem(e) {
+  addItem(e) {
     e.preventDefault();
-
-    let item_id = this.item_idTarget.value;
-    console.log(item_id);
-
+    let itemId = this.itemIdTarget.value;
     Rails.ajax({
-      url: `/items/${item_id}/add_to_cart`, 
+      url: `/items/${itemId}/add_to_cart`, 
       type: 'POST', 
       success: resp => {
-        document.querySelector('#items_count').innerText = resp.items_count 
+        let event  = new CustomEvent('addItemToCart', { 'detail': resp.items_count });
+        document.dispatchEvent(event );
       }, 
       error: err => {
         console.log(err);
